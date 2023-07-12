@@ -7,6 +7,11 @@ from nltk.stem.porter import PorterStemmer
 stemmer=PorterStemmer()
 
 import os
+import nltk
+
+nltk.download('punkt')
+nltk.download('stopwords')
+
 
 # Get the absolute path to the directory containing the script
 script_dir = os.path.dirname(os.path.abspath('app.py'))
@@ -17,11 +22,10 @@ file_path = os.path.join(script_dir, 'vectorizer.pkl')
 # Load the pickled object
 tfidf = pickle.load(open(file_path, 'rb'))
 
-tfidf= pickle.load(open('vectorizer.pkl','rb'))
 model=pickle.load(open("model.pkl",'rb'))
 
 st.title("SMS spam classifier")
-sms = st.text_area("Enter the message")
+text = st.text_area("Enter the message")
 
 
 def preprocess(text):
@@ -49,7 +53,7 @@ def preprocess(text):
 
 if st.button("Predict"):
 
-    transformed= preprocess(sms)
+    transformed= preprocess(text)
 
     vector = tfidf.transform([transformed])
 
