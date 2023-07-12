@@ -6,6 +6,17 @@ import string
 from nltk.stem.porter import PorterStemmer
 stemmer=PorterStemmer()
 
+import os
+
+# Get the absolute path to the directory containing the script
+script_dir = os.path.dirname(os.path.abspath('app.py'))
+
+# Construct the absolute path to the pickled file
+file_path = os.path.join(script_dir, 'vectorizer.pkl')
+
+# Load the pickled object
+tfidf = pickle.load(open(file_path, 'rb'))
+
 tfidf= pickle.load(open('vectorizer.pkl','rb'))
 model=pickle.load(open("model.pkl",'rb'))
 
